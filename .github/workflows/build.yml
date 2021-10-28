@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Slack notification on buil failed
+name: Build with slack notification setup
 
 on:
   push:
@@ -42,4 +42,4 @@ jobs:
           status: ${{ job.status }}
           notify_when: 'failure'
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
