@@ -35,8 +35,16 @@ jobs:
         with:
           name: public
           path: ./public
-      - name: Slack Notification
-        if: always()
+      # We have to do it like that... https://github.com/rtCamp/action-slack-notify/issues/92
+      - name: Slack Notification if failed
+        if: failure()
         uses: rtCamp/action-slack-notify@v2
         env:
+          SLACK_MESSAGE: "!!!BUILD FAILED!!!"
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      - name: Slack Notification if succed
+        if: success()
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_MESSAGE: "Build success"
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
