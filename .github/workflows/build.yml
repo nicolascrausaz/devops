@@ -35,11 +35,8 @@ jobs:
         with:
           name: public
           path: ./public
-      - name: Report Status
+      - name: Slack Notification
         if: always()
-        uses: ravsamhq/notify-slack-action@v1
-        with:
-          status: ${{ job.status }}
-          notify_when: 'failure'
+        uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
